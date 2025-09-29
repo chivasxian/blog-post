@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
+use Filament\Pages\Auth\EmailVerification;
 
 
 
@@ -32,6 +33,11 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->registration()
+            ->profile()
+            // ->authMiddleware([
+            // 'auth',
+            // 'verified'
+            // ])
             //->emailVerification()
             ->profile(isSimple: false)
             ->passwordReset()

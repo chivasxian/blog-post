@@ -16,6 +16,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
 
 class PostResource extends Resource
 {
@@ -33,11 +35,19 @@ class PostResource extends Resource
     public static function infolist(Schema $schema): Schema
     {
         return PostInfolist::configure($schema);
+        return $infolist
+            ->schema([
+                CommentsEntry::make('filament_comments'),
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return PostsTable::configure($table);
+        return $table
+            ->actions([
+                CommentsAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
